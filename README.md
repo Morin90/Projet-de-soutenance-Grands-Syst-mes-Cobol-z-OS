@@ -230,7 +230,7 @@ respecter une architecture professionnelle
 
 démontrer la qualité du code et des traitements
 
- Auteur
+ Auteurs
 
 Julien & Z******
 Projet de soutenance – Grands Systèmes
