@@ -1,0 +1,56 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. SCONVDEV.
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT F-DEVISE ASSIGN TO DDDEV
+               ORGANIZATION IS INDEXED
+               ACCESS MODE IS RANDOM
+               RECORD KEY IS NOM-DEV
+               FILE STATUS IS WS-FILE-STATUS-DEV.
+
+       DATA DIVISION.
+       FILE SECTION.
+       FD F-DEVISE.
+       01 ENR-PROD.
+           05 NOM-DEV  PIC XX.
+           05 VAL-DEV  PIC 9(2)V9999.
+
+       WORKING-STORAGE SECTION.
+       01 WS-FILE-STATUS-DEV PIC XX VALUE '00'.
+
+       LINKAGE SECTION.
+      * ---- VARIABLES REçUES DU PROGRAMME APPELANT ----*
+       01 LK-WS-DEVISE       PIC XX.
+       01 LK-WS-PRIX-NUM     PIC 9(3)V99.
+       01 LK-WS-PRIX-CONVERT PIC 9(3)V99.
+       01 LK-RETURN-CODE     PIC 9(2).
+
+       PROCEDURE DIVISION USING
+           LK-WS-DEVISE
+           LK-WS-PRIX-NUM
+           LK-WS-PRIX-CONVERT
+           LK-RETURN-CODE.
+
+       1000-DEBUT.
+           OPEN INPUT F-DEVISE
+           MOVE 0 TO LK-RETURN-CODE.
+
+       2000-CONVERSION.
+           MOVE LK-WS-DEVISE TO NOM-DEV
+           READ F-DEVISE
+               INVALID KEY
+                   DISPLAY 'DEVISE NON TROUVEE : ' LK-WS-DEVISE
+                   MOVE 99 TO LK-RETURN-CODE
+                   GO TO 3000-FIN
+           END-READ
+
+           COMPUTE LK-WS-PRIX-CONVERT = LK-WS-PRIX-NUM * VAL-DEV
+           MOVE 'DO' TO LK-WS-DEVISE
+           DISPLAY 'CONVERSION EFFECTUEE POUR ' NOM-DEV
+                   ' TAUX=' VAL-DEV
+                   ' PRIX FINAL=' LK-WS-PRIX-CONVERT.
+
+       3000-FIN.
+           CLOSE F-DEVISE
+           EXIT PROGRAM.
