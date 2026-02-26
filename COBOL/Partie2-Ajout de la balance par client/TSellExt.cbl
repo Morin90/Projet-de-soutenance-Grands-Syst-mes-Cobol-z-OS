@@ -109,7 +109,7 @@
                WHENEVER SQLERROR CONTINUE
            END-EXEC
            EXEC SQL
-               SET CURRENT SQLID = 'API14'
+               SET CURRENT SQLID = 'API6'
            END-EXEC
            .
 
