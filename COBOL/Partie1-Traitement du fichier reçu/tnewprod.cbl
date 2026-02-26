@@ -73,7 +73,7 @@
            OPEN INPUT F-NEWPRODS
            MOVE 0 TO WS-FILE-STATUS
            EXEC SQL
-                SET CURRENT SQLID = 'API14'
+                SET CURRENT SQLID = 'API6'
            END-EXEC
            .
 
