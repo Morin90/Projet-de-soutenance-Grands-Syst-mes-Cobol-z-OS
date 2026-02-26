@@ -138,7 +138,7 @@
 
 
                EXEC SQL
-                   INSERT INTO API14.PRODUCTS (P_NO, DESCRIPTION, PRICE)
+                   INSERT INTO API6.PRODUCTS (P_NO, DESCRIPTION, PRICE)
                     VALUES (:PS-P-NO, :PS-DESCRIPTION, :PS-PRICE)
                END-EXEC
 
